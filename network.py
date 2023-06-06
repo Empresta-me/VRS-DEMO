@@ -276,6 +276,6 @@ class Network:
                 if value == 0:
                     continue
 
-                links.append({"source":name,"target":id_order[other_idx],"value":value})
+                links.append({"source":name,"target":id_order[other_idx],"value":value, "message":self.get_random_message(value, name+id_order[other_idx])})
  
         return {"nodes":nodes,"links":links}
