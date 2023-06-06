@@ -351,7 +351,7 @@
         // add each node to the list
         nodes.forEach(node => {
           const li = document.createElement("li");
-          li.textContent = `${node.name} - ${node.reputation}%`;
+          li.textContent = `${node.name} - ${node.reputation.toFixed(2)}%`;
           nodeList.appendChild(li);
         });
       }
