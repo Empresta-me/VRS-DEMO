@@ -29,8 +29,8 @@ def visualizer():
 @app.route("/api/add-node", methods=['POST'])
 def add_node():
     name = request.headers.get("name", None)
-
     if name:
+	
         network.nodes[name] = network.add_node(name)
         return f"Node '{name}' added", 200
     else:
@@ -43,6 +43,9 @@ def vouch_for():
 
     if not sender or not receiver:
         return "Missed sender and/or receiver", 401
+
+    if not any([ i.id == name for i in network.nodes ]):
+	return "Node not found", 401
 
     try:
         network.nodes[sender].vouch(receiver, True)
@@ -57,6 +60,9 @@ def vouch_against():
 
     if not sender or not receiver:
         return "Missed sender and/or receiver", 401
+
+    if not any([ i.id == name for i in network.nodes ]):
+	return "Node not found", 401
 
     try:
         network.nodes[sender].vouch(receiver, False)
