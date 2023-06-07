@@ -44,8 +44,11 @@ def vouch_for():
     if not sender or not receiver:
         return "Missed sender and/or receiver", 401
 
-    if not any([ i.id == name for i in network.nodes ]):
-	return "Node not found", 401
+    if not any([ i == sender for i in network.nodes ]):
+        return "Node not found", 401
+
+    if not any([ i == receiver for i in network.nodes ]):
+	    return "Node not found", 401
 
     try:
         network.nodes[sender].vouch(receiver, True)
@@ -61,8 +64,11 @@ def vouch_against():
     if not sender or not receiver:
         return "Missed sender and/or receiver", 401
 
-    if not any([ i.id == name for i in network.nodes ]):
-	return "Node not found", 401
+    if not any([ i == sender for i in network.nodes ]):
+        return "Node not found", 401
+
+    if not any([ i == receiver for i in network.nodes ]):
+	    return "Node not found", 401
 
     try:
         network.nodes[sender].vouch(receiver, False)
